@@ -35,7 +35,7 @@ function tools.deepCopy(original, excludeKeys)
     return copy
 end
 
--- Function to merge two tables without mutating the originals
+-- Function to merge tableA into tableB without modifying the original tables
 function tools.merge(tableA, tableB, excludeKeys)
     local mergedTable = {}
     excludeKeys = excludeKeys or ArrayList.new();

@@ -10,7 +10,9 @@ PhunLib = {
     name = "PhunLib",
     events = {
         OnReady = "OnPhunLibReady",
-        OnEmptyServer = "OnPhunServerEmptyServer"
+        OnEmptyServer = "OnPhunLibEmptyServer",
+        OnDawn = "OnPhunLibDawn",
+        OnDusk = "OnPhunLibDusk"
     },
     commands = {
         onDusk = "PhunLibOnDusk",
@@ -101,9 +103,8 @@ function Core:setIsNight(value)
 
     if isServer() then
         sendServerCommand(Core.name, value and Core.commands.onDusk or Core.commands.onDawn, {})
-        triggerEvent(value and self.events.OnNightStart or self.events.OnDayStart)
     end
-
+    triggerEvent(value and self.events.OnDusk or self.events.OnDawn)
 end
 
 function Core:testNight()
