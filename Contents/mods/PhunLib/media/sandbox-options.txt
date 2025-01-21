@@ -1,0 +1,41 @@
+VERSION = 1,
+
+option PhunLib.NightSpeed
+{ 
+    type = enum,
+    numValues = 26,
+    default = 3, 
+    page = PhunLib, 
+    translation = PhunLib_NightSpeed,
+    valueTranslation = DayLength,
+}
+
+option PhunLib.NightOffset
+{ 
+    type = integer, 
+    default = 0,
+    min = 0,
+    max = 24,
+    page = PhunLib,
+    translation = PhunLib_NightOffset,
+}
+
+option PhunLib.DaySpeed
+{ 
+    type = enum,
+    numValues = 26,
+    default = 3, 
+    page = PhunLib, 
+    translation = PhunLib_DaySpeed,
+    valueTranslation = DayLength,
+}
+
+option PhunLib.DayOffset
+{ 
+    type = integer, 
+    default = 0,
+    min = 0,
+    max = 24,
+    page = PhunLib,
+    translation = PhunLib_DayOffset,
+}

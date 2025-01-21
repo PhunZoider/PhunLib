@@ -1,0 +1,29 @@
+UI_EN = {
+    UI_PhunLib_Hour = "Hour",
+    UI_PhunLib_HoursAgo = "%1 Hours ago"
+    UI_PhunLib_Hours = "Hours",
+    UI_PhunLib_Day = "Day",
+    UI_PhunLib_Days = "Days",
+    UI_PhunLib_DaysAgo = "%1 Days",
+    UI_PhunLib_Minutes = "Minutes",
+    UI_PhunLib_Minute = "Minute",
+    
+    UI_PhunLib_JustNow = "Just now",
+    UI_PhunLib_X_ago = "%1 ago",
+
+    UI_PhunLib_X_Second = "%1 second",
+    UI_PhunLib_X_Seconds = "%1 seconds",
+    UI_PhunLib_X_Minute = "%1 minute",
+    UI_PhunLib_X_Minutes = "%1 minutes",  
+    UI_PhunLib_X_Hour = "%1 hour",
+    UI_PhunLib_X_Hours = "%1 hours",
+    UI_PhunLib_X_Day = "day",
+    UI_PhunLib_X_Days = "days",    
+    UI_PhunLib_X_Month = "%1 month",
+    UI_PhunLib_X_Months = "%1 months",
+    UI_PhunLib_X_Year = "%1 year",
+    UI_PhunLib_X_Years = "%1 years",
+    UI_PhunLib_DaysAndHours = "%1 %2, %3 %4",
+    UI_PhunLib_LessThanHour = "Less than an hour",
+    UI_PhunLib_LessThanMinute = "Less than a minute",
+}

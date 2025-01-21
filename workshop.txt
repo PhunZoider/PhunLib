@@ -1,0 +1,26 @@
+version=1
+title=PhunLib
+description=Shared functions for Phun mods
+
+description=[h2]File tools[/h2][list]
+description=[*]PhunLib.table.tableToString(table) - returns a string representation of a lua table
+description=[*]PhunLib.table.saveTable(filename, data) - saves a table to Lua\{filename}.lua
+description=[*]PhunLib.file.loadTable(filename, createIfNotExists*) - returns a table loaded from Lua\{filename}.lua
+description=[*]PhunLib.table.log(...) - appends the values passed to lua\Phun.log
+description=[/list]
+
+description=[h2]Table tools[/h2][list]
+description=[*]PhunLib.table.shallowCopy(original, excludeKeys*) - returns a shallow copy of original table. Optionally include an ArrayList of keys to exclude
+description=[*]PhunLib.table.deepCopy(original, excludeKeys*) - returns a deep copy of original table. Optionally include ArrayList of keys to exclude
+description=[*]PhunLib.table.merge(tableA, tableB, excludeKeys*) - returns a merged copy of 2 tables where tableB overwrites and existing keys in tableA. Optionally include an ArrayList of keys to exclude
+description=[/list]
+
+description=[h2]String tools[/h2][list]
+description=[*]PhunLib.string.formatWholeNumber(number) - takes a number and returns thousands separated string without any decimals (eg 2432.3 returns "2,432")
+description=[*]PhunLib.string.timeDifference(time1, time2*) - returns the number of years, months, hours, minutes and seconds as a number between 2 timestamps. time2 defaults to now
+description=[*]PhunLib.string.timeAgo(time1, time2*, defaultText*) - returns friendly text of time difference as string between timestamps. time2 defaults to now, defaultText defaults to "Just Now"
+description=[/list]
+description=beta testing! Currently play testing and balance tweaking on PhunZoid server
+description=[url=https://github.com/PhunZoider/PhunZones]Repo and more info[/url]
+tags=
+visibility=public
