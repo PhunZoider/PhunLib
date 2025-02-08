@@ -42,6 +42,14 @@
                 "match": ".*",
                 "cmd": "xcopy ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib ${env.USERPROFILE}\\Zomboid\\Workshop\\PhunLib\\Contents\\mods\\PhunLib /Y /I /E /F"
             },
+            {
+                "match": ".*",
+                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid41\\mods\\PhunLib 2>nul"
+            },
+            {
+                "match": ".*",
+                "cmd": "xcopy ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib ${env.USERPROFILE}\\Zomboid41\\mods\\PhunLib /Y /I /E /F /EXCLUDE:xclude"
+            },            
         ]
     },
     "editor.formatOnSave": true,

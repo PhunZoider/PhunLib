@@ -26,7 +26,7 @@ Events.OnTickEvenPaused.Add(function()
         if players:size() == 0 then
             emptyServerCalculate = false
             triggerEvent(Core.events.OnEmptyServer, {})
-            Core.doLogs()
+            Core.file.doLogs()
         end
     elseif emptyServerTickCount > 100 then
         emptyServerTickCount = 0
