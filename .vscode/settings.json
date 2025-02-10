@@ -9,7 +9,7 @@
             {
                 "match": ".*",
                 "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42 2>nul"
-            },            
+            },
             {
                 "match": ".*",
                 "cmd": "xcopy ${workspaceFolder}\\Contents\\mods ${env.USERPROFILE}\\Zomboid\\mods /Y /I /E /F /EXCLUDE:xclude"
@@ -44,12 +44,12 @@
             },
             {
                 "match": ".*",
-                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid41\\mods\\PhunLib 2>nul"
+                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\pz41\\mods\\PhunLib 2>nul"
             },
             {
                 "match": ".*",
-                "cmd": "xcopy ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib ${env.USERPROFILE}\\Zomboid41\\mods\\PhunLib /Y /I /E /F /EXCLUDE:xclude"
-            },            
+                "cmd": "xcopy ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib ${env.USERPROFILE}\\pz41\\mods\\PhunLib /Y /I /E /F /EXCLUDE:xclude"
+            },
         ]
     },
     "editor.formatOnSave": true,
