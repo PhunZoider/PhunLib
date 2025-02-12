@@ -41,7 +41,7 @@ function Core:ini()
 end
 
 -- wrapper for getOnlinePlayers that returns only local players if a client
-function Core.onlinePlayers()
+function Core.onlinePlayers(all)
 
     local onlinePlayers;
 
@@ -61,6 +61,17 @@ function Core.onlinePlayers()
     end
 
     return onlinePlayers;
+end
+
+function Core.getPlayerByUsername(name)
+    local online = Core.onlinePlayers()
+    for i = 0, online:size() - 1 do
+        local player = online:get(i);
+        if player:getUsername() == name then
+            return player
+        end
+    end
+    return nil
 end
 
 function Core.debug(...)
