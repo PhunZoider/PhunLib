@@ -30,8 +30,8 @@ description=[*]PhunLib.printTable(...) - prints contents of table to console
 description=[*]PhunLib.onlinePlayers(...) - returns ArrayList of players regardless of if its single player. If called by client, returns only isLocalPlayers
 description=[/list]
 description=
-description=Made for B41 and techinically B42 ready?
+description=Made for B41 and B42
 description=[url=https://discord.gg/v2USyAtP6q][img]https://i.imgur.com/q2rnXYZ.png[/img][/url]
 description=Coded with love for our awesome [url=https://discord.gg/v2USyAtP6q]PhunZoid[/url] community. [url=https://github.com/PhunZoider/PhunTime]Repo and more info[/url]
-tags=Build 41;Multiplayer
+tags=Build 41;Build 42;Multiplayer
 visibility=public
