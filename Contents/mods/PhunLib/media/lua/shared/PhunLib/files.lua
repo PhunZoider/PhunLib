@@ -118,19 +118,21 @@ end
 local logQueue = {}
 
 function tools.log(...)
-    local filename = filename or "Phun.log"
-    tools.addLogEntryToFile(filename, ...)
+    tools.logTo("Phun.log", ...)
 end
 
-function tools.addLogEntryToFile(filename, ...)
+function tools.logTo(filename, ...)
+    Events.EveryOneMinute.Remove(tools.doLogs)
     if not logQueue[filename] then
         logQueue[filename] = {}
     end
     local entry = os.date("%Y-%m-%d %H:%M:%S") .. "\t" .. table.concat({...}, "\t")
     table.insert(logQueue[filename], entry)
+    Events.EveryOneMinute.Add(tools.doLogs)
 end
 
 function tools.doLogs()
+    Events.EveryOneMinute.Remove(tools.doLogs)
     for filename, entries in pairs(logQueue) do
         if #entries > 0 then
             tools.appendToFile(filename, entries, true)
@@ -158,12 +160,12 @@ function tools.appendToFile(filename, line, createIfNotExist)
     fileWriterObj:close()
 end
 
-if not tools.inied then
-    tools.inied = true
-    -- try to onlu do this once in case file is required elsewhere
-    Events.EveryTenMinutes.Add(function()
-        tools.doLogs()
-    end)
-end
+-- if not tools.inied then
+--     tools.inied = true
+--     -- try to onlu do this once in case file is required elsewhere
+--     Events.EveryTenMinutes.Add(function()
+--         tools.doLogs()
+--     end)
+-- end
 
 return tools
