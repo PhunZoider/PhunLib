@@ -87,6 +87,55 @@ end
 function tools.tableToString(tbl, indent)
     indent = indent or 0
     local formatted = "{\n"
+    local prefix = string.rep("  ", indent + 1)
+
+    local doneKeys = {}
+
+    -- First: handle array part (sequential numeric keys starting from 1)
+    for i = 1, #tbl do
+        local value = tbl[i]
+        doneKeys[i] = true
+        if type(value) == "table" then
+            formatted = formatted .. string.format("%s%s", prefix, tools.tableToString(value, indent + 1))
+        elseif type(value) == "string" then
+            formatted = formatted .. string.format("%s%q,\n", prefix, value)
+        else
+            formatted = formatted .. string.format("%s%s,\n", prefix, value)
+        end
+    end
+
+    -- Then: handle non-array keys
+    for key, value in pairs(tbl) do
+        if not doneKeys[key] then
+            local keyStr
+
+            if type(key) == "string" then
+                if string.match(key, "^[%a_][%w_]*$") then
+                    keyStr = key .. " = "
+                else
+                    keyStr = string.format("[%q] = ", key)
+                end
+            else
+                keyStr = "[" .. tostring(key) .. "] = "
+            end
+
+            if type(value) == "table" then
+                formatted = formatted .. string.format("%s%s%s", prefix, keyStr, tools.tableToString(value, indent + 1))
+            elseif type(value) == "string" then
+                formatted = formatted .. string.format("%s%s%q,\n", prefix, keyStr, value)
+            else
+                formatted = formatted .. string.format("%s%s%s,\n", prefix, keyStr, tostring(value))
+            end
+        end
+    end
+
+    formatted = formatted .. string.rep("  ", indent) .. "},\n"
+    return formatted
+end
+
+function tools.tableToStringold(tbl, indent)
+    indent = indent or 0
+    local formatted = "{\n"
     local prefix = string.rep("  ", indent + 1) -- Increase indentation
 
     for key, value in pairs(tbl) do
