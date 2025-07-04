@@ -13,6 +13,6 @@ Events.OnCreatePlayer.Add(function(player)
     Core:ini()
 end)
 
-Events.OnPreFillWorldObjectContextMenu.Add(function(playerObj, context, worldobjects)
-    Core:showContext(playerObj, context, worldobjects)
-end);
+-- Events.OnPreFillWorldObjectContextMenu.Add(function(playerObj, context, worldobjects)
+--     Core:showContext(playerObj, context, worldobjects)
+-- end);
