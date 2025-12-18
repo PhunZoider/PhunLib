@@ -114,7 +114,8 @@ function Core:setIsNight(value)
     -- end
     -- getSandboxOptions():getOptionByName("DayLength"):setValue(speed)
     -- getSandboxOptions():applySettings()
-
+    print("PhunLib: It is now " .. (value and "night." or "day.") .. " - " ..
+              tostring(getSandboxOptions():getOptionByName("DayLength"):getValue()) .. " day length.")
     if isServer() then
         sendServerCommand(Core.name, value and Core.commands.onDusk or Core.commands.onDawn, {})
     end
