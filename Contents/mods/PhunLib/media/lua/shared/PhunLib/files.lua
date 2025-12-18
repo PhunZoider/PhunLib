@@ -57,6 +57,10 @@ function tools.loadTable(filename, createIfNotExists)
     end
     fileReaderObj:close()
 
+    if data[#data]:sub(-1) == "," then
+        data[#data] = data[#data]:sub(1, -2)
+    end
+
     local result, err = tools.tableOfStringsToTable(data)
 
     if err then
@@ -80,11 +84,63 @@ function tools.saveTable(fname, data)
     fileWriterObj:close()
 end
 
+function tools.tableToString(tbl, indent)
+    indent = indent or 0
+    local prefix = string.rep("  ", indent + 1)
+    local result = {}
+    local doneKeys = {}
+
+    -- Handle array part
+    for i = 1, #tbl do
+        local value = tbl[i]
+        doneKeys[i] = true
+        local line
+        if type(value) == "table" then
+            line = prefix .. tools.tableToString(value, indent + 1)
+        elseif type(value) == "string" then
+            line = string.format("%s%q", prefix, value)
+        else
+            line = string.format("%s%s", prefix, tostring(value))
+        end
+        table.insert(result, line)
+    end
+
+    -- Handle non-array part
+    for key, value in pairs(tbl) do
+        if not doneKeys[key] then
+            local keyStr
+            if type(key) == "string" then
+                if string.match(key, "^[%a_][%w_]*$") then
+                    keyStr = key .. " = "
+                else
+                    keyStr = string.format("[%q] = ", key)
+                end
+            else
+                keyStr = "[" .. tostring(key) .. "] = "
+            end
+
+            local line
+            if type(value) == "table" then
+                line = prefix .. keyStr .. tools.tableToString(value, indent + 1)
+            elseif type(value) == "string" then
+                line = string.format("%s%s%q", prefix, keyStr, value)
+            else
+                line = string.format("%s%s%s", prefix, keyStr, tostring(value))
+            end
+            table.insert(result, line)
+        end
+    end
+
+    return "{\n" .. table.concat(result, ",\n") .. "\n" .. string.rep("  ", indent) .. "}"
+end
+
 --- returns a string representation of a table
+--- Deprecated: use tools.tableToString instead
+--- Reason: Trailing commas in the output
 --- @param tbl table
 --- @param nokeys boolean
 --- @param depth number
-function tools.tableToString(tbl, indent)
+function tools.tableToStringdep(tbl, indent)
     indent = indent or 0
     local formatted = "{\n"
     local prefix = string.rep("  ", indent + 1)

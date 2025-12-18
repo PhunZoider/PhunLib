@@ -100,18 +100,20 @@ function Core.printTable(t, indent)
     end
 end
 
+local hasServerInstalled = nil
+
 function Core:setIsNight(value)
 
     if self.isNight == value then
         return
     end
     self.isNight = value
-    local speed = Core.settings.DaySpeed
-    if value then
-        speed = Core.settings.NightSpeed
-    end
-    getSandboxOptions():getOptionByName("DayLength"):setValue(speed)
-    getSandboxOptions():applySettings()
+    -- local speed = Core.settings.DaySpeed
+    -- if value then
+    --     speed = Core.settings.NightSpeed
+    -- end
+    -- getSandboxOptions():getOptionByName("DayLength"):setValue(speed)
+    -- getSandboxOptions():applySettings()
 
     if isServer() then
         sendServerCommand(Core.name, value and Core.commands.onDusk or Core.commands.onDawn, {})
@@ -120,6 +122,14 @@ function Core:setIsNight(value)
 end
 
 function Core:testNight()
+
+    if hasServerInstalled == nil then
+        hasServerInstalled = getActivatedMods():contains("PhunServer")
+    end
+
+    if hasServerInstalled then
+        return
+    end
 
     if not climateManager and getClimateManager then
         climateManager = getClimateManager()
@@ -132,8 +142,8 @@ function Core:testNight()
         local season = climateManager:getSeason()
         if season and season.getDawn then
             local time = gt:getTimeOfDay()
-            self.dawnTime = season:getDawn() + self.settings.DayOffset
-            self.duskTime = season:getDusk() + self.settings.NightOffset
+            self.dawnTime = season:getDawn()
+            self.duskTime = season:getDusk()
         end
     end
     if self.duskTime and self.dawnTime then
@@ -162,6 +172,14 @@ local tid = nil
 function Core.getCategory(item)
     -- from the awesome BetterSorting mod by Blindcoder,
     -- but modified to return the category rather than just set it
+    -- local debug = {
+    --     ["Base.Jatimatic_Stock"] = true,
+    --     ["Base.Brass556"] = true
+    -- }
+
+    -- if debug[item:getFullName()] then
+    --     print("Debugging category for item: " .. item:getFullName())
+    -- end
 
     if tid == nil then
         if TweakItemData then
@@ -171,14 +189,19 @@ function Core.getCategory(item)
         end
     end
     if tid then
-        local test = TweakItemData[item:getFullName()]["DisplayCategory"] or
-                         TweakItemData[item:getFullName()]["displaycategory"]
+        local check = TweakItemData[item:getFullName()] or {}
+        local test = check["DisplayCategory"] or check["displaycategory"]
         if test then
             return test
         end
     end
 
-    local category = tostring(item:getDisplayCategory());
+    local category = item.getCategory and item:getCategory() or item.getTypeString and item:getTypeString() or nil
+    local dcategory = item:getDisplayCategory();
+
+    category = tostring(dcategory or category)
+
+    -- print("Checking category for item: " .. item:getFullName() .. " - DisplayCategory: " .. category)
 
     if item.fluidContainer then
         local fluid = item.fluidContainer:getFluidContainer():getPrimaryFluid();
@@ -203,14 +226,14 @@ function Core.getCategory(item)
     elseif item:getDisplayCategory() == "Water" then
         category = "FoodB";
 
-    elseif item:getTypeString() == "Food" then
+    elseif item.getTypeString and item:getTypeString() == "Food" then
         if item:getDaysTotallyRotten() > 0 and item:getDaysTotallyRotten() < 1000000000 then
             category = "FoodP";
         else
             category = "FoodN";
         end
 
-    elseif item:getTypeString() == "Literature" then
+    elseif item.getTypeString and item:getTypeString() == "Literature" then
         if string.len(item:getSkillTrained()) > 0 then
             category = "LitS";
         elseif item:getTeachedRecipes() and not item:getTeachedRecipes():isEmpty() then
@@ -221,7 +244,7 @@ function Core.getCategory(item)
             category = "LitW";
         end
 
-    elseif item:getTypeString() == "Weapon" then
+    elseif item.getTypeString and item:getTypeString() == "Weapon" then
         if item:getDisplayCategory() == "Explosives" or item:getDisplayCategory() == "Devices" then
             category = "WepBomb";
         end
@@ -231,7 +254,7 @@ function Core.getCategory(item)
         category = "MediaA";
 
         -- Tsar's True Actions Dance Cards
-    elseif item:getTypeString() == "Normal" and item:getModuleName() == "TAD" then
+    elseif item.getTypeString and item:getTypeString() == "Normal" and item:getModuleName() == "TAD" then
         category = "Misc";
     end
 
@@ -262,7 +285,7 @@ function Core.getAllItems(refresh)
         local item = itemList:get(i)
         if not item:getObsolete() and not item:isHidden() then
 
-            local cat = item:getDisplayCategory() -- Core.getCategory(item)
+            local cat = Core.getCategory(item) or "Unknown" -- Core.getCategory(item)
             if cat ~= "" and catMap[cat] == nil then
                 catMap[cat] = true
                 table.insert(Core.itemCategories, {

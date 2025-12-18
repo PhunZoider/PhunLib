@@ -4,11 +4,11 @@
         "commands": [
             {
                 "match": ".*",
-                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\media 2>nul"
+                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib 2>nul"
             },
             {
                 "match": ".*",
-                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42 2>nul"
+                "cmd": "rmdir /S /Q ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42.0.0 2>nul"
             },
             {
                 "match": ".*",
@@ -16,19 +16,19 @@
             },
             {
                 "match": ".*",
-                "cmd": "xcopy ${workspaceFolder}\\Contents\\mods\\PhunLib\\media ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42\\media /Y /I /E /F"
+                "cmd": "xcopy ${workspaceFolder}\\Contents\\mods\\PhunLib\\media ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42.0.0\\media /Y /I /E /F"
             },
             {
                 "match": ".*",
-                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunLib\\mod.info ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42\\mod.info /Y"
+                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunLib\\mod.info ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42.0.0\\mod.info /Y"
             },
             {
                 "match": ".*",
-                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunLib\\poster.png ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42\\poster.png /Y"
+                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunLib\\poster.png ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42.0.0\\poster.png /Y"
             },
             {
                 "match": ".*",
-                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunLib\\icon.png ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42\\icon.png /Y"
+                "cmd": "copy ${workspaceFolder}\\Contents\\mods\\PhunLib\\icon.png ${env.USERPROFILE}\\Zomboid\\mods\\PhunLib\\42.0.0\\icon.png /Y"
             },
             {
                 "match": ".*",

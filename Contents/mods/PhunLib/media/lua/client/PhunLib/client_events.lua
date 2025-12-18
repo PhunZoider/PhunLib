@@ -13,6 +13,9 @@ Events.OnCreatePlayer.Add(function(player)
     Core:ini()
 end)
 
+-- Events.EveryOneMinute.Add(function()
+--     Core:testNight()
+-- end)
 -- Events.OnPreFillWorldObjectContextMenu.Add(function(playerObj, context, worldobjects)
 --     Core:showContext(playerObj, context, worldobjects)
 -- end);
