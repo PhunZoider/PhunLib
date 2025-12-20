@@ -40,6 +40,11 @@ function Core:ini()
 
 end
 
+function Core.isAdmin(player)
+    local level = getAccessLevel and (getAccessLevel() == "moderator" or getAccessLevel() == "admin") or false
+    return isAdmin() or isDebugEnabled() or level
+end
+
 -- wrapper for getOnlinePlayers that returns only local players if a client
 function Core.onlinePlayers(all)
 
