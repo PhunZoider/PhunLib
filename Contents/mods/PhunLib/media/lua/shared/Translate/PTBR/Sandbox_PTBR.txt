@@ -1,0 +1,16 @@
+Sandbox_PTBR = {
+
+    Sandbox_PhunLib = "PhunLib",
+    Sandbox_PhunLib_DaySpeed = "Velocidade do dia",
+    Sandbox_PhunLib_DaySpeed_tooltip = "Velocidade com que o dia passa",
+
+    Sandbox_PhunLib_DayOffset = "Ajuste do dia",
+    Sandbox_PhunLib_DaySpeed_tooltip = "+/- horas a partir do amanhecer para ativar a velocidade do dia",
+
+    Sandbox_PhunLib_NightSpeed = "Velocidade da noite",
+    Sandbox_PhunLib_NightSpeed_tooltip = "Velocidade com que a noite passa",
+
+    Sandbox_PhunLib_NightOffset = "Ajuste da noite",
+    Sandbox_PhunLib_NightSpeed_tooltip = "+/- horas a partir do anoitecer para ativar a velocidade da noite",
+
+}
