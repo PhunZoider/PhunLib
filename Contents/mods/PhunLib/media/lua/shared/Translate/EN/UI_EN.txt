@@ -17,8 +17,8 @@ UI_EN = {
     UI_PhunLib_X_Minutes = "%1 minutes",  
     UI_PhunLib_X_Hour = "%1 hour",
     UI_PhunLib_X_Hours = "%1 hours",
-    UI_PhunLib_X_Day = "day",
-    UI_PhunLib_X_Days = "days",    
+    UI_PhunLib_X_Day = "%1 day",
+    UI_PhunLib_X_Days = "%1 days",    
     UI_PhunLib_X_Month = "%1 month",
     UI_PhunLib_X_Months = "%1 months",
     UI_PhunLib_X_Year = "%1 year",
@@ -26,4 +26,5 @@ UI_EN = {
     UI_PhunLib_DaysAndHours = "%1 %2, %3 %4",
     UI_PhunLib_LessThanHour = "Less than an hour",
     UI_PhunLib_LessThanMinute = "Less than a minute",
+
 }

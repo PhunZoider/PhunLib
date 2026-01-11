@@ -41,8 +41,12 @@ function Core:ini()
 end
 
 function Core.isAdmin(player)
-    local level = getAccessLevel and (getAccessLevel() == "moderator" or getAccessLevel() == "admin") or false
-    return isAdmin() or isDebugEnabled() or level
+
+    if isAdmin() or getDebug() then
+        return true
+    end
+    return (getAccessLevel and (getAccessLevel() == "moderator" or getAccessLevel() == "admin")) or false
+
 end
 
 -- wrapper for getOnlinePlayers that returns only local players if a client
@@ -69,11 +73,13 @@ function Core.onlinePlayers(all)
     return onlinePlayers;
 end
 
-function Core.getPlayerByUsername(name)
+function Core.getPlayerByUsername(name, caseSensitive)
     local online = Core.onlinePlayers()
+    local text = caseSensitive and name or name:lower()
     for i = 0, online:size() - 1 do
         local player = online:get(i);
-        if player:getUsername() == name then
+        if (caseSensitive and player:getUsername() == name) or
+            (not caseSensitive and player:getUsername():lower() == text) then
             return player
         end
     end
@@ -119,8 +125,8 @@ function Core:setIsNight(value)
     -- end
     -- getSandboxOptions():getOptionByName("DayLength"):setValue(speed)
     -- getSandboxOptions():applySettings()
-    print("PhunLib: It is now " .. (value and "night." or "day.") .. " - " ..
-              tostring(getSandboxOptions():getOptionByName("DayLength"):getValue()) .. " day length.")
+    -- print("PhunLib: It is now " .. (value and "night." or "day.") .. " - " ..
+    --           tostring(getSandboxOptions():getOptionByName("DayLength"):getValue()) .. " day length.")
     if isServer() then
         sendServerCommand(Core.name, value and Core.commands.onDusk or Core.commands.onDawn, {})
     end
