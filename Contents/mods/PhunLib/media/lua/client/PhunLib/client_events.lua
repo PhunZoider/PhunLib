@@ -5,7 +5,7 @@ local Core = PhunLib
 
 Events.OnServerCommand.Add(function(module, command, arguments)
     if module == Core.name then
-        Core:setIsNight(command == Core.commands.OnDusk)
+        Core:setIsNight(command == Core.commands.onDusk)
     end
 end)
 
